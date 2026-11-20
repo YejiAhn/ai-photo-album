@@ -1,0 +1,15 @@
+version: 0.2
+
+phases:
+  build:
+    commands:
+      - test -f front-end/index.html
+      - test -f front-end/sdk/apigClient.js
+      - test -f front-end/config.js
+      - node --check front-end/app.js
+      - node --check front-end/sdk-binary.js
+
+artifacts:
+  base-directory: front-end
+  files:
+    - '**/*'

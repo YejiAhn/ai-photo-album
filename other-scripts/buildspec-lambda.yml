@@ -1,0 +1,19 @@
+version: 0.2
+
+phases:
+  build:
+    commands:
+      - python3 -m py_compile lambda-functions/index-photos/lambda_function.py lambda-functions/search-photos/lambda_function.py
+      - mkdir -p build
+      - zip -j build/index-photos.zip lambda-functions/index-photos/lambda_function.py
+      - zip -j build/search-photos.zip lambda-functions/search-photos/lambda_function.py
+
+      - aws lambda update-function-code --region us-east-1 --function-name index-photos --zip-file fileb://build/index-photos.zip --query CodeSha256 --output text
+      - aws lambda wait function-updated-v2 --region us-east-1 --function-name index-photos
+
+      - aws lambda update-function-code --region us-east-1 --function-name search-photos --zip-file fileb://build/search-photos.zip --query CodeSha256 --output text
+      - aws lambda wait function-updated-v2 --region us-east-1 --function-name search-photos
+
+artifacts:
+  files:
+    - build/*.zip
