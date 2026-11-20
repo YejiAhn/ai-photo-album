@@ -12,7 +12,7 @@ from opensearchpy import (
 from opensearchpy.exceptions import RequestError
 
 
-INDEX_NAME = "photos"
+INDEX_NAME = os.environ.get("OPENSEARCH_INDEX", "photos")
 
 session = boto3.Session()
 s3 = session.client("s3")

@@ -13,8 +13,11 @@ logger = logging.getLogger()
 logger.setLevel(logging.INFO)
 
 REGION = os.environ["AWS_REGION"]
-INDEX_NAME = "photos"
-PHOTO_BUCKET = "yeji-ai-photo-album-photos-2026"
+INDEX_NAME = os.environ.get("OPENSEARCH_INDEX", "photos")
+PHOTO_BUCKET = os.environ.get(
+    "PHOTO_BUCKET",
+    "yeji-ai-photo-album-photos-2026",
+)
 
 session = boto3.Session()
 lex = session.client(
