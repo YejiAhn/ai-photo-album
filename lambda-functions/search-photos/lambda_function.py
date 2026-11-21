@@ -156,7 +156,7 @@ def search_photos(keywords):
 
 
 def lambda_handler(event, context):
-    print("Deployment version: assignment3-v2")
+    print("Deployment version: assignment3-Final")
     params = event.get("queryStringParameters") or {}
     query = params.get("q", "")
     if not isinstance(query, str):
