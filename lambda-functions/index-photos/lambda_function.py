@@ -88,7 +88,7 @@ def ensure_index():
 
 
 def lambda_handler(event, context):
-    print("Deployment version: assignment3-Final")
+    print("Deployment version: assignment3")
     processed = 0
 
     for record in event.get("Records", []):
